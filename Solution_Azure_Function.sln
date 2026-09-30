@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37628.2 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learning_AzureFunciton_API", "Learning_AzureFunciton_API\Learning_AzureFunciton_API.csproj", "{BBA42DB3-6CA3-4FF8-A7A1-8F5C4A9017A3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Azure_Functions", "Azure_Functions\Azure_Functions.csproj", "{7C7A3C63-B6CD-4DB5-8C74-9C9D01B65835}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BBA42DB3-6CA3-4FF8-A7A1-8F5C4A9017A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBA42DB3-6CA3-4FF8-A7A1-8F5C4A9017A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBA42DB3-6CA3-4FF8-A7A1-8F5C4A9017A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBA42DB3-6CA3-4FF8-A7A1-8F5C4A9017A3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C7A3C63-B6CD-4DB5-8C74-9C9D01B65835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C7A3C63-B6CD-4DB5-8C74-9C9D01B65835}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C7A3C63-B6CD-4DB5-8C74-9C9D01B65835}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C7A3C63-B6CD-4DB5-8C74-9C9D01B65835}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1B010884-9F8C-402B-A6A2-17FA87331EA7}
+	EndGlobalSection
+EndGlobal
