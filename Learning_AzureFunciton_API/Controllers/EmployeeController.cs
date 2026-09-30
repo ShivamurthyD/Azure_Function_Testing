@@ -8,16 +8,29 @@ namespace Learning_AzureFunciton_API.Controllers
     public class EmployeeController : ControllerBase
     {
         public readonly HttpClient _httpclient;
-        public EmployeeController(HttpClient httpClient)
+        private readonly IConfiguration _configuration;
+        public EmployeeController(HttpClient httpClient, IConfiguration configuration)
         {
             this._httpclient = httpClient;
+            _configuration = configuration;
         }
         [HttpGet("hello-function")]
         public async Task<IActionResult> callFunction()
         {
-            var respose =await _httpclient.GetAsync("http://localhost:7086/api/HelloFunction");
-            var result= await respose.Content.ReadAsStringAsync();
-            return Ok(result);
+            var functionUrl = _configuration["AzureFunctionUrl"];
+            var functionKey = _configuration["AzureFunctionKey"];
+            var request = new HttpRequestMessage(HttpMethod.Get, functionUrl);
+
+            if (!string.IsNullOrEmpty(functionKey))
+            {
+                request.Headers.Add("x-functions-key", functionKey);
+            }
+
+            var response = await _httpclient.SendAsync(request);
+
+            var result = await response.Content.ReadAsStringAsync();
+
+            return StatusCode((int)response.StatusCode, result);
         }
     }
 }
