@@ -14,7 +14,10 @@ namespace Azure_Functions
         [Function("HelloFunction")]
         public async Task<HttpResponseData> Run(
         [HttpTrigger(AuthorizationLevel.Function, "get")]
-        HttpRequestData req)
+        HttpRequestData req,
+        [BlobInput("documents/hello.txt",
+            Connection = "AzureWebJobsStorage")]
+        string blobContent)
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
 
