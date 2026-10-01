@@ -20,7 +20,7 @@ namespace Azure_Functions
             Connection = "AzureWebJobsStorage")]
         string blobContent)
         {
-            var updatedContent = blobContent + "\nNew text added by Function";
+            var updatedContent = "TEST BLOB OUTPUT";
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteStringAsync("File process successfully");
 
