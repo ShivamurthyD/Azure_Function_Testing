@@ -21,7 +21,7 @@ namespace Azure_Functions
         {
             var response = req.CreateResponse(HttpStatusCode.OK);
 
-           await response.WriteStringAsync("Hello from Azure Function!");
+           await response.WriteStringAsync(blobContent);
 
             return response;
         }
