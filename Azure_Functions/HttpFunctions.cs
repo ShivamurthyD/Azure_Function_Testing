@@ -25,7 +25,7 @@ namespace Azure_Functions
             await response.WriteStringAsync("File process successfully");
 
 
-           await response.WriteStringAsync(blobContent);
+           //await response.WriteStringAsync(blobContent);
 
             return new MultiResponse
             {
