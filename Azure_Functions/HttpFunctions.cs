@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Worker;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using System;
 using System.Collections.Generic;
@@ -12,18 +13,31 @@ namespace Azure_Functions
     public class HttpFunctions
     {
         [Function("HelloFunction")]
-        public async Task<HttpResponseData> Run(
+        public async Task<MultiResponse> Run(
         [HttpTrigger(AuthorizationLevel.Function, "get")]
         HttpRequestData req,
         [BlobInput("documents/hello.txt",
             Connection = "AzureWebJobsStorage")]
         string blobContent)
         {
+            var updatedContent = blobContent + "\nNew text added by Function";
             var response = req.CreateResponse(HttpStatusCode.OK);
+            await response.WriteStringAsync("File process successfully");
+
 
            await response.WriteStringAsync(blobContent);
 
-            return response;
+            return new MultiResponse
+            {
+                httpResponse = response,
+                outputBlob = updatedContent
+            };
         }
+    }
+    public class MultiResponse
+    {
+        public HttpResponseData httpResponse { get; set; } = null!;
+        [BlobOutput("documents/result.txt",Connection = "AzureWebJobsStorage")]
+        public string outputBlob { get; set; } = "";
     }
 }
