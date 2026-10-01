@@ -20,17 +20,17 @@ namespace Azure_Functions
             Connection = "AzureWebJobsStorage")]
         string blobContent)
         {
-            var updatedContent = "TEST BLOB OUTPUT";
+            //var updatedContent = "TEST BLOB OUTPUT";
             var response = req.CreateResponse(HttpStatusCode.OK);
             await response.WriteStringAsync("File process successfully");
 
 
-           //await response.WriteStringAsync(blobContent);
+            //await response.WriteStringAsync(blobContent);
 
             return new MultiResponse
             {
                 httpResponse = response,
-                outputBlob = updatedContent
+                outputBlob = "TEST BLOB OUTPUT"
             };
         }
     }
