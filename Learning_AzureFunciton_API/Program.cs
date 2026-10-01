@@ -3,6 +3,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddCors(option => {
+    option.AddPolicy("AngularApp", policy =>
+    {
+        policy.WithOrigins
+        (
+                "http://localhost:4200",
+                "https://thankful-coast-019d80100.2.azurestaticapps.net"
+        ).AllowAnyHeader().AllowAnyMethod();
+    });
+});
 builder.Services.AddHttpClient();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -18,6 +28,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.UseCors("AngularApp");
 
 app.UseAuthorization();
 
