@@ -77,26 +77,31 @@ namespace Learning_AzureFunciton_API.Controllers
     //        FileName = file.FileName
     //    });
     //}
+    //[HttpPost("Upload")]
+    //public IActionResult Upload([FromForm] IFormFile file)
+    //{
+    //  if (file == null)
+    //  {
+    //    return BadRequest("FILE IS NULL");
+    //  }
+
+    //  if (file.Length == 0)
+    //  {
+    //    return BadRequest("FILE IS EMPTY");
+    //  }
+
+    //  return Ok(new
+    //  {
+    //    Message = "File received successfully",
+    //    FileName = file.FileName,
+    //    Length = file.Length,
+    //    ContentType = file.ContentType
+    //  });
+    //}
     [HttpPost("Upload")]
-    public IActionResult Upload([FromForm] IFormFile file)
+    public IActionResult Upload()
     {
-      if (file == null)
-      {
-        return BadRequest("FILE IS NULL");
-      }
-
-      if (file.Length == 0)
-      {
-        return BadRequest("FILE IS EMPTY");
-      }
-
-      return Ok(new
-      {
-        Message = "File received successfully",
-        FileName = file.FileName,
-        Length = file.Length,
-        ContentType = file.ContentType
-      });
+      return Ok("UPLOAD METHOD REACHED");
     }
   }
 }
