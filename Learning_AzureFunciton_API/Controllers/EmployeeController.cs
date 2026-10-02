@@ -1,4 +1,4 @@
-﻿using Azure.Storage.Blobs;
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -33,49 +33,70 @@ namespace Learning_AzureFunciton_API.Controllers
 
             return StatusCode((int)response.StatusCode, result);
         }
-        [HttpPost("Upload")]
-        public async Task<IActionResult> Upload(IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("Please select a file.");
-            }
+    //[HttpPost("Upload")]
+    //public async Task<IActionResult> Upload(IFormFile file)
+    //{
+    //    if (file == null || file.Length == 0)
+    //    {
+    //        return BadRequest("Please select a file.");
+    //    }
 
-            // 2. Get Azure Storage configuration
-            var connectionString =
-                _configuration["AzureStorage:ConnectionString"];
+    //    // 2. Get Azure Storage configuration
+    //    var connectionString =
+    //        _configuration["AzureStorage:ConnectionString"];
 
-            var containerName =
-                _configuration["AzureStorage:ContainerName"];
+    //    var containerName =
+    //        _configuration["AzureStorage:ContainerName"];
 
-            // 3. Create BlobServiceClient
-            var blobServiceClient =
-                new BlobServiceClient(connectionString);
+    //    // 3. Create BlobServiceClient
+    //    var blobServiceClient =
+    //        new BlobServiceClient(connectionString);
 
-            // 4. Get the documents container
-            var containerClient =
-                blobServiceClient.GetBlobContainerClient(containerName);
+    //    // 4. Get the documents container
+    //    var containerClient =
+    //        blobServiceClient.GetBlobContainerClient(containerName);
 
-            // 5. Create container if it doesn't exist
-            await containerClient.CreateIfNotExistsAsync();
+    //    // 5. Create container if it doesn't exist
+    //    await containerClient.CreateIfNotExistsAsync();
 
-            // 6. Create a BlobClient for the uploaded file
-            var blobClient =
-                containerClient.GetBlobClient(file.FileName);
+    //    // 6. Create a BlobClient for the uploaded file
+    //    var blobClient =
+    //        containerClient.GetBlobClient(file.FileName);
 
-            // 7. Upload file
-            using var stream = file.OpenReadStream();
+    //    // 7. Upload file
+    //    using var stream = file.OpenReadStream();
 
-            await blobClient.UploadAsync(
-                stream,
-                overwrite: true);
+    //    await blobClient.UploadAsync(
+    //        stream,
+    //        overwrite: true);
 
-            // 8. Return success
-            return Ok(new
-            {
-                Message = "File uploaded successfully",
-                FileName = file.FileName
-            });
-        }
+    //    // 8. Return success
+    //    return Ok(new
+    //    {
+    //        Message = "File uploaded successfully",
+    //        FileName = file.FileName
+    //    });
+    //}
+    [HttpPost("Upload")]
+    public IActionResult Upload([FromForm] IFormFile file)
+    {
+      if (file == null)
+      {
+        return BadRequest("FILE IS NULL");
+      }
+
+      if (file.Length == 0)
+      {
+        return BadRequest("FILE IS EMPTY");
+      }
+
+      return Ok(new
+      {
+        Message = "File received successfully",
+        FileName = file.FileName,
+        Length = file.Length,
+        ContentType = file.ContentType
+      });
     }
+  }
 }
